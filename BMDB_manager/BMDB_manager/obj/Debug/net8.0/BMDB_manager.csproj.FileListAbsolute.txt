@@ -1,0 +1,14 @@
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\bin\Debug\net8.0\BMDB_manager.exe
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\bin\Debug\net8.0\BMDB_manager.deps.json
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\bin\Debug\net8.0\BMDB_manager.runtimeconfig.json
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\bin\Debug\net8.0\BMDB_manager.dll
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\bin\Debug\net8.0\BMDB_manager.pdb
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.AssemblyInfoInputs.cache
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.AssemblyInfo.cs
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.csproj.CoreCompileInputs.cache
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.dll
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\refint\BMDB_manager.dll
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.pdb
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.genruntimeconfig.cache
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\ref\BMDB_manager.dll
