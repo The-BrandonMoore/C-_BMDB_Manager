@@ -29,34 +29,72 @@
 
 
 
-            Console.WriteLine("Welcome to the BootCamp Movie Database!");
-            Console.WriteLine("=======================================\n");
+            Console.WriteLine("  Welcome to the BootCamp Movie Database!");
+            Console.WriteLine("===========================================");
 
-            DisplayMenu();
+           // DisplayMenu();
             string command = "";
             while (command != "exit")
             {
                 //get string for the command
-                command = GetString("\nPlease Enter a Menu Keyword: ");
-                Console.WriteLine($"You have chosen: '{command}'.\n");
+                DisplayMenu();
+                command = GetString("Please Enter a Menu Keyword: ");
+                Console.WriteLine($"You have chosen: '{command}'.");
                 //switch function
                 switch (command)
                 {
                     case ("menu"):
                         DisplayMenu();
                         break;
-                    case ("list"):
-                        ListMovies();
+
+                    case ("movies"):
+                    case ("movie"):
+                        string movieCommand = "";
+                        Console.WriteLine("\nYou have Entered the Movie Information Menu");
+                        Console.WriteLine("To go back to the main menu, enter the command 'back'\n");
+                        while (movieCommand != "back")
+                        {
+                            MovieMenu();
+                            Console.Write("Enter a Movie Menu Keyword: ");
+                            movieCommand = Console.ReadLine().ToLower();
+                            switch (movieCommand)
+                            {
+                                case ("menu"):
+                                    MovieMenu();
+                                    break;
+                                case ("list"):
+                                    ListMovies();
+                                    break;
+                                case ("get"):
+                                    GetMovieInfo();
+                                    break;
+                                case ("add"):
+                                    AddMovie();
+                                    break;
+                                case ("del"):
+                                    DeleteMovie();
+                                    break;
+                                case ("back"):
+                                    break;
+                                default:
+                                    Console.WriteLine("Invalid keyword entered. Please enter a valid Menu keyword.");
+                                    break;
+
+                            }
+
+                        }
                         break;
+
                     case ("actors"):
+                    case ("actor"):
                         string actorCommand = "";
-                        Console.WriteLine("\nYou Have Entered the Actor Information Sub-Menu");
+                        Console.WriteLine("\nYou Have Entered the Actor Information Menu");
                         Console.WriteLine("To go back to the main menu, enter the command 'back'\n");
                         while (actorCommand != "back")
                         {
                             ActorSubMenu();
                             Console.Write("Enter an Actor Menu Keyword: ");
-                            actorCommand = Console.ReadLine();
+                            actorCommand = Console.ReadLine().ToLower();
                             switch (actorCommand)
                             {
                                 case ("menu"):
@@ -82,15 +120,6 @@
                             }
                         }
                         break;
-                    case ("get"):
-                        GetMovieInfo();
-                        break;
-                    case ("add"):
-                        AddMovie();
-                        break;
-                    case ("del"):
-                        DeleteMovie();
-                        break;
                     case ("exit"):
                         break;
                     default:
@@ -99,12 +128,9 @@
 
 
 
-                        //manage movies with a list of movies
-
-
                 }
             }
-            Console.WriteLine("Peace Out!");
+            Console.WriteLine("Come back!");
 
 
 
@@ -167,7 +193,7 @@
             }
 
             actors.Add(new Actor(newActorId, newActorFirstName, newActorLastName, newActorGender, newActorDOB));
-            Console.WriteLine($"You have added {newActorFirstName} {newActorLastName} to the Boot Camp Movie Database.");
+            Console.WriteLine($"You have added {newActorFirstName} {newActorLastName} to the Boot Camp Movie Database.\n");
         }
 
         private static void GetActorInfo()
@@ -186,7 +212,7 @@
             Console.WriteLine("++++++++++++++++++\n");
             for (int i = 0; i < actors.Count(); i++)
             {
-                Console.WriteLine($"{actors[i].Id}. {actors[i].FirstName}, {actors[i].LastName}, {actors[i].Gender}, {actors[i].BirthDate}");
+                Console.WriteLine($"{actors[i].Id}. {actors[i].FirstName}, {actors[i].LastName}, {actors[i].Gender}, {actors[i].BirthDate}\n");
             }
         }
 
@@ -198,7 +224,7 @@
             var deleteMovie = movies[deleteNum - 1];
             string deleteMovieTitle = movies[deleteNum - 1].Title;
             movies.Remove(deleteMovie);
-            Console.WriteLine($"You have deleted {deleteMovieTitle} from the Database");
+            Console.WriteLine($"You have deleted {deleteMovieTitle} from the Database\n");
         }
 
         private static void AddMovie()
@@ -232,7 +258,7 @@
             Console.Write("Enter New Movie Director: ");
             string newMovieDirector = Console.ReadLine();
             movies.Add(new Movies(newMovieId, newMovieTitle, newMovieYear, newMovieRating, newMovieDirector));
-            Console.WriteLine($"You have added {newMovieTitle} to the Boot Camp Movie Database.");
+            Console.WriteLine($"You have added {newMovieTitle} to the Boot Camp Movie Database.\n");
         }
 
         private static void GetMovieInfo()
@@ -242,7 +268,7 @@
             int getNumber = GetInt("Input desired movie ID number: ", 0, movies.Count());
             int getNumber2 = getNumber - 1;
             var movieChoice = movies[getNumber2];
-            Console.WriteLine($"Selected Movie information: ID#: {movieChoice.Id}, {movieChoice.Title}, {movieChoice.Year}, {movieChoice.Rating}, {movieChoice.Director}");
+            Console.WriteLine($"Selected Movie information: ID#: {movieChoice.Id}, {movieChoice.Title}, {movieChoice.Year}, {movieChoice.Rating}, {movieChoice.Director}\n");
         }
 
         private static string GetString(string prompt)
@@ -255,8 +281,8 @@
 
         private static void ActorSubMenu()
         {
-            Console.WriteLine("  Actor Information Sub-Menu");
-            Console.WriteLine("++++++++++++++++++++++++++++++\n");
+            Console.WriteLine("  Actor Information Menu");
+            Console.WriteLine("++++++++++++++++++++++++++++++");
             Console.WriteLine("Menu - Display Actor Info Menu");
             Console.WriteLine("List -- list all actors");
             Console.WriteLine("Get -- get actor information by ID");
@@ -264,16 +290,25 @@
             Console.WriteLine("Del -- delete an actor");
             Console.WriteLine("Back -- back to the main menu\n");
         }
-        private static void DisplayMenu()
+
+        private static void MovieMenu()
         {
-            Console.WriteLine("  Movie Database Menu");
-            Console.WriteLine("+++++++++++++++++++++++\n");
-            Console.WriteLine("Menu - Display Menu");
+            Console.WriteLine("  Movie Information Menu");
+            Console.WriteLine("++++++++++++++++++++++++++");
+            Console.WriteLine("Menu - Display Movie Info Menu");
             Console.WriteLine("List -- list all movies");
-            Console.WriteLine("Actors -- Enter the Actor Information Sub-Menu");
             Console.WriteLine("Get -- get a movie by id");
             Console.WriteLine("Add -- add a movie");
             Console.WriteLine("Del -- delete a movie");
+            Console.WriteLine("Back -- back to the main menu\n");
+        }
+        private static void DisplayMenu()
+        {
+            Console.WriteLine("\n  Main Menu");
+            Console.WriteLine("+++++++++++++");
+            Console.WriteLine("Menu - Display Main Menu");
+            Console.WriteLine("Movies -- Enter the Movie Information Sub-Menu");
+            Console.WriteLine("Actors -- Enter the Actor Information Sub-Menu");
             Console.WriteLine("Exit -- exit the app\n");
         }
 
@@ -283,7 +318,7 @@
             Console.WriteLine("+++++++++++++++++++\n");
             for (int i = 0; i < movies.Count(); i++)
             {
-                Console.WriteLine($"{movies[i].Id}. {movies[i].Title}, {movies[i].Year}, {movies[i].Rating}, {movies[i].Director}");
+                Console.WriteLine($"{movies[i].Id}. {movies[i].Title}, {movies[i].Year}, {movies[i].Rating}, {movies[i].Director}\n");
             }
         }
 

@@ -12,3 +12,4 @@ C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manage
 C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.pdb
 C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.genruntimeconfig.cache
 C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\ref\BMDB_manager.dll
+C:\repos\maximum-bc-20240819\C-sharp-repos\BMDB Manager\BMDB_manager\BMDB_manager\obj\Debug\net8.0\BMDB_manager.sourcelink.json
