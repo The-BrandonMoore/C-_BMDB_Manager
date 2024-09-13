@@ -1,5 +1,4 @@
-﻿
-namespace BMDB_manager
+﻿namespace BMDB_manager.Models
 {
     public class Movies
     {
@@ -11,11 +10,11 @@ namespace BMDB_manager
 
         public Movies(int idnum, string title, int year, string rating, string director)
         {
-            this.Id = idnum;
-            this.Title = title;
-            this.Year = year;
-            this.Rating = rating;
-            this.Director = director;
+            Id = idnum;
+            Title = title;
+            Year = year;
+            Rating = rating;
+            Director = director;
         }
     }
 

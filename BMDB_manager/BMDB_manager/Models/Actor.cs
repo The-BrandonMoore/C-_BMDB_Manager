@@ -1,5 +1,4 @@
-﻿
-namespace BMDB_manager
+﻿namespace BMDB_manager.Models
 {
     internal class Actor
     {
@@ -12,11 +11,11 @@ namespace BMDB_manager
 
         public Actor(int id, string firstName, string lastName, string gender, DateOnly birthdate)
         {
-            this.Id = id;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Gender = gender;
-            this.BirthDate = birthdate;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Gender = gender;
+            BirthDate = birthdate;
         }
     }
 }

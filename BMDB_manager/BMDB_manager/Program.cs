@@ -1,19 +1,25 @@
-﻿namespace BMDB_manager
+﻿using BMDB_manager.DB;
+using BMDB_manager.Models;
+
+namespace BMDB_manager
 {
     internal class Program
     {
-        static List<Movies> movies = new List<Movies>();
+
+        public static MovieDB MovieDB = new MovieDB();
+
+
         static List<Actor> actors = new List<Actor>();
         static void Main(string[] args)
         {
 
 
             //intial movies into the list
-            movies.Add(new Movies(1, "The Princess Bride", 1987, "PG", "Rob Reiner"));
-            movies.Add(new Movies(2, "The Mummy", 1999, "PG-13", "Stephen Sommers"));
-            movies.Add(new Movies(3, "The Great Outdoors", 1988, "PG", "Howard Deutch"));
-            movies.Add(new Movies(4, "Lord of the Rings: The Fellowship of the Ring", 2001, "PG-13", "Peter Jackson"));
-            movies.Add(new Movies(5, "National Lampoon's Christmas Vacation", 1989, "PG-13", "Jeremiah S. Chechik"));
+            //movies.Add(new Movies(1, "The Princess Bride", 1987, "PG", "Rob Reiner"));
+            //movies.Add(new Movies(2, "The Mummy", 1999, "PG-13", "Stephen Sommers"));
+            //movies.Add(new Movies(3, "The Great Outdoors", 1988, "PG", "Howard Deutch"));
+            //movies.Add(new Movies(4, "Lord of the Rings: The Fellowship of the Ring", 2001, "PG-13", "Peter Jackson"));
+            //movies.Add(new Movies(5, "National Lampoon's Christmas Vacation", 1989, "PG-13", "Jeremiah S. Chechik"));
 
             //initial actors into the list
             actors.Add(new Actor(1, "Cary", "Elwes", "M", new DateOnly(1962, 10, 26)));
@@ -27,12 +33,12 @@
             actors.Add(new Actor(9, "Ian", "McKellan", "M", new DateOnly(1939, 05, 25)));
             actors.Add(new Actor(10, "Randy", "Quaid", "M", new DateOnly(1950, 10, 01)));
 
-
-
             Console.WriteLine("  Welcome to the BootCamp Movie Database!");
             Console.WriteLine("===========================================");
 
-           // DisplayMenu();
+            //MovieDB.LoadMoviesFile();
+
+            // DisplayMenu();
             string command = "";
             while (command != "exit")
             {
@@ -67,6 +73,9 @@
                                     break;
                                 case ("get"):
                                     GetMovieInfo();
+                                    break;
+                                case ("update"):
+                                    UpdateMovieTitle();
                                     break;
                                 case ("add"):
                                     AddMovie();
@@ -212,7 +221,7 @@
             Console.WriteLine("++++++++++++++++++\n");
             for (int i = 0; i < actors.Count(); i++)
             {
-                Console.WriteLine($"{actors[i].Id}. {actors[i].FirstName}, {actors[i].LastName}, {actors[i].Gender}, {actors[i].BirthDate}\n");
+                Console.WriteLine($"{actors[i].Id}. {actors[i].FirstName}, {actors[i].LastName}, {actors[i].Gender}, {actors[i].BirthDate}");
             }
         }
 
@@ -220,18 +229,46 @@
         {
             Console.WriteLine("Delete Movie from Database");
             Console.WriteLine("==========================");
-            int deleteNum = GetInt("Desired Movie ID Number: ", 1, movies.Count());
-            var deleteMovie = movies[deleteNum - 1];
-            string deleteMovieTitle = movies[deleteNum - 1].Title;
-            movies.Remove(deleteMovie);
-            Console.WriteLine($"You have deleted {deleteMovieTitle} from the Database\n");
+
+            bool getMovieCode = true;
+            while (getMovieCode)
+            {
+                string checkerString = "n";
+                int deleteNum = GetInt("Desired Movie ID Number: ", 1, MovieDB.GetMovies().Count()) -1;
+                //  foreach (Movies m in MovieDB.GetMovies())
+                // {
+                Movies movieToDelete = MovieDB.GetMovies()[deleteNum];
+                if (movieToDelete != null)
+                {
+                    getMovieCode = false;
+                    string deletedTitle = MovieDB.GetMovies()[deleteNum].Title;
+                    
+                    MovieDB.GetMovies().Remove(movieToDelete);
+                    for (int j = deleteNum; j < MovieDB.GetMovies().Count(); j++)
+                    {
+                        MovieDB.GetMovies()[j].Id = MovieDB.GetMovies()[j].Id - 1;//here is the issue
+                    }
+                    Console.WriteLine($"{deletedTitle} successfully deleted");
+                    MovieDB.SaveMoviesFile();
+                    checkerString = "y";
+                    
+                }
+                //  }
+                if (checkerString == "n")
+                {
+                    Console.WriteLine($"Movie ID {deleteNum} not found.");
+                    Console.WriteLine("Please Enter a Valid Movie ID");
+                    getMovieCode = true;
+                }
+
+            }
         }
 
         private static void AddMovie()
         {
             Console.WriteLine("Add a movie to the database.");
             Console.WriteLine("============================\n");
-            int newMovieId = movies.Count() + 1;
+            int newMovieId = MovieDB.GetMovies().Count() + 1;
             Console.Write("Enter New Movie Title:  ");
             string newMovieTitle = Console.ReadLine();
             Console.Write("Enter New Movie Year: ");
@@ -257,17 +294,30 @@
 
             Console.Write("Enter New Movie Director: ");
             string newMovieDirector = Console.ReadLine();
-            movies.Add(new Movies(newMovieId, newMovieTitle, newMovieYear, newMovieRating, newMovieDirector));
+            MovieDB.GetMovies().Add(new Movies(newMovieId, newMovieTitle, newMovieYear, newMovieRating, newMovieDirector));
             Console.WriteLine($"You have added {newMovieTitle} to the Boot Camp Movie Database.\n");
+            MovieDB.SaveMoviesFile();
+        }
+
+        private static void UpdateMovieTitle()
+        {
+            int getNumber = GetInt("Input desired movie ID number: ", 0, MovieDB.GetMovies().Count()) - 1;
+            Console.Write("Input the Updated Title:  ");
+            string updatedTitle = Console.ReadLine();
+            var movieChoice = MovieDB.GetMovies()[getNumber];
+            movieChoice.Title = updatedTitle;
+            Console.WriteLine($"You have successfully updated the title for {movieChoice.Title}.");
+            MovieDB.SaveMoviesFile();
+
         }
 
         private static void GetMovieInfo()
         {
             Console.WriteLine("Retrieve a movie by ID Number");
             Console.WriteLine("=============================\n");
-            int getNumber = GetInt("Input desired movie ID number: ", 0, movies.Count());
+            int getNumber = GetInt("Input desired movie ID number: ", 0, MovieDB.GetMovies().Count());
             int getNumber2 = getNumber - 1;
-            var movieChoice = movies[getNumber2];
+            var movieChoice = MovieDB.GetMovies()[getNumber2];
             Console.WriteLine($"Selected Movie information: ID#: {movieChoice.Id}, {movieChoice.Title}, {movieChoice.Year}, {movieChoice.Rating}, {movieChoice.Director}\n");
         }
 
@@ -299,6 +349,7 @@
             Console.WriteLine("List -- list all movies");
             Console.WriteLine("Get -- get a movie by id");
             Console.WriteLine("Add -- add a movie");
+            Console.WriteLine("Update -- Update a movie's title");
             Console.WriteLine("Del -- delete a movie");
             Console.WriteLine("Back -- back to the main menu\n");
         }
@@ -316,10 +367,11 @@
         {
             Console.WriteLine("List of all Movies.");
             Console.WriteLine("+++++++++++++++++++\n");
-            for (int i = 0; i < movies.Count(); i++)
+            for (int i = 0; i < MovieDB.GetMovies().Count; i++)
             {
-                Console.WriteLine($"{movies[i].Id}. {movies[i].Title}, {movies[i].Year}, {movies[i].Rating}, {movies[i].Director}\n");
+                Console.WriteLine($"{MovieDB.GetMovies()[i].Id}. {MovieDB.GetMovies()[i].Title}, {MovieDB.GetMovies()[i].Year}, {MovieDB.GetMovies()[i].Rating}, {MovieDB.GetMovies()[i].Director}");
             }
+            Console.WriteLine("");
         }
 
         private static int GetInt(string prompt, int min, int max)
