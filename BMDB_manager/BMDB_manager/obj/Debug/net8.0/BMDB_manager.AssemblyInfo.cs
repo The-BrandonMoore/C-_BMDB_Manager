@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BMDB_manager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79a6d159c7fc58f91bbe0e0034cea81a4d9e0e42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+818b0b2a679040e1fa23f81ef54057fc81e18fbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("BMDB_manager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BMDB_manager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
